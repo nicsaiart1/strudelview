@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@types/*": ["types/*"],
+      "@services/*": ["services/*"],
+      "@controllers/*": ["controllers/*"],
+      "@middleware/*": ["middleware/*"],
+      "@utils/*": ["utils/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

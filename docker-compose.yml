@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:3001
+      - VITE_WS_URL=ws://localhost:3001
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - CLIENT_URL=http://localhost:3000
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  # Optional: Add Redis for session storage
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+
+  # Optional: Add PostgreSQL for persistence
+  # postgres:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     POSTGRES_DB: strudelview
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+# volumes:
+#   redis_data:
+#   postgres_data:
