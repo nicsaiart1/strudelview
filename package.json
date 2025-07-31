@@ -1,0 +1,182 @@
+{
+  "name": "strudelview",
+  "version": "0.1.0",
+  "description": "Real-time, browser-based Strudel environment with drag-and-drop heterarchical interface",
+  "keywords": [
+    "strudel",
+    "live-coding",
+    "audio",
+    "visual-programming",
+    "real-time",
+    "music",
+    "react",
+    "typescript",
+    "web-audio"
+  ],
+  "homepage": "https://github.com/nicsaiart1/strudelview#readme",
+  "bugs": {
+    "url": "https://github.com/nicsaiart1/strudelview/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicsaiart1/strudelview.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "url": "https://yourwebsite.com"
+  },
+  "contributors": [],
+  "main": "./client/dist/index.js",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm run build",
+    "build:server": "cd server && npm run build",
+    "test": "npm run test:client && npm run test:server",
+    "test:client": "cd client && npm run test",
+    "test:server": "cd server && npm run test",
+    "test:coverage": "npm run test:coverage:client && npm run test:coverage:server",
+    "test:coverage:client": "cd client && npm run test:coverage",
+    "test:coverage:server": "cd server && npm run test:coverage",
+    "lint": "npm run lint:client && npm run lint:server",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "lint:fix": "npm run lint:fix:client && npm run lint:fix:server",
+    "lint:fix:client": "cd client && npm run lint:fix",
+    "lint:fix:server": "cd server && npm run lint:fix",
+    "format": "npm run format:client && npm run format:server",
+    "format:client": "cd client && npm run format",
+    "format:server": "cd server && npm run format",
+    "type-check": "npm run type-check:client && npm run type-check:server",
+    "type-check:client": "cd client && npm run type-check",
+    "type-check:server": "cd server && npm run type-check",
+    "clean": "npm run clean:client && npm run clean:server",
+    "clean:client": "cd client && rm -rf dist node_modules",
+    "clean:server": "cd server && rm -rf dist node_modules",
+    "install:all": "npm install && npm run install:client && npm run install:server",
+    "install:client": "cd client && npm install",
+    "install:server": "cd server && npm install",
+    "docker:build": "docker build -t strudelview .",
+    "docker:run": "docker run -p 3000:3000 -p 3001:3001 strudelview",
+    "docker:compose": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "deploy:staging": "./scripts/deploy-staging.sh",
+    "deploy:production": "./scripts/deploy-production.sh",
+    "setup": "npm run install:all && npm run build",
+    "start": "npm run build && npm run docker:compose",
+    "start:dev": "npm run dev",
+    "start:prod": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "start:client": "cd client && npm run preview",
+    "start:server": "cd server && npm start",
+    "health-check": "curl -f http://localhost:3001/health || exit 1",
+    "precommit": "npm run lint && npm run type-check && npm run test",
+    "postinstall": "husky install",
+    "release": "standard-version",
+    "release:dry": "standard-version --dry-run"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.1.0",
+    "standard-version": "^9.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "lint-staged": {
+    "client/src/**/*.{js,jsx,ts,tsx}": [
+      "cd client && npm run lint:fix",
+      "cd client && npm run format"
+    ],
+    "server/src/**/*.{js,ts}": [
+      "cd server && npm run lint:fix",
+      "cd server && npm run format"
+    ],
+    "*.{md,json,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run type-check && npm run test"
+    }
+  },
+  "standard-version": {
+    "skip": {
+      "bump": false,
+      "changelog": false,
+      "commit": false,
+      "tag": false
+    },
+    "types": [
+      {
+        "type": "feat",
+        "section": "Features"
+      },
+      {
+        "type": "fix",
+        "section": "Bug Fixes"
+      },
+      {
+        "type": "perf",
+        "section": "Performance Improvements"
+      },
+      {
+        "type": "revert",
+        "section": "Reverts"
+      },
+      {
+        "type": "docs",
+        "section": "Documentation",
+        "hidden": false
+      },
+      {
+        "type": "style",
+        "section": "Styles",
+        "hidden": true
+      },
+      {
+        "type": "chore",
+        "section": "Maintenance",
+        "hidden": true
+      },
+      {
+        "type": "refactor",
+        "section": "Code Refactoring",
+        "hidden": true
+      },
+      {
+        "type": "test",
+        "section": "Tests",
+        "hidden": true
+      },
+      {
+        "type": "build",
+        "section": "Build System",
+        "hidden": true
+      },
+      {
+        "type": "ci",
+        "section": "Continuous Integration",
+        "hidden": true
+      }
+    ]
+  }
+} 
